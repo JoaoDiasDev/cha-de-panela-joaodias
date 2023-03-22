@@ -1,1 +1,27 @@
-<p>products-list works!</p>
+<div class="container my-5">
+    <h1>Lista de Produtos</h1>
+    <h2 class="mb-3">Amanda & João Matheus</h2>
+    <table class="table" *ngIf="products">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Imagem</th>
+                <th>Link</th>
+                <th>Reservado</th>
+                <th>Quem Reservou</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td><img src="getImageData(product.imageLink)" alt="Imagem do Produto"></td>
+                <td>{{product.productLink}}</td>
+                <td>{{product.reserved ? 'Sim' : 'Não'}}</td>
+                <td>{{product.whoReserved}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!products || products.length <= 0">Sem produtos na Lista</p>
+</div>
