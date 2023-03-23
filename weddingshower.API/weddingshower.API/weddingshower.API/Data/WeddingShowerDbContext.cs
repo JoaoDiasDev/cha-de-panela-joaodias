@@ -5,10 +5,10 @@ namespace weddingshower.API.Data
 {
     public class WeddingShowerDbContext : DbContext
     {
-        public WeddingShowerDbContext(DbContextOptions options) : base(options)
+        public WeddingShowerDbContext(DbContextOptions<WeddingShowerDbContext> options) : base(options)
         {
         }
 
-        DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

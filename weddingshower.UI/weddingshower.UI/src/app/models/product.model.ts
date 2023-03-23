@@ -1,7 +1,8 @@
 export interface Product {
-    id: string;
+    idProduct: string;
     name: string;
     imageLink: string;
+    imageData: any;
     productLink: string;
     reserved: boolean;
     whoReserved: string;

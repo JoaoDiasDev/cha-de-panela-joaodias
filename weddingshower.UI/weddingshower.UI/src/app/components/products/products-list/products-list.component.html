@@ -4,7 +4,6 @@
     <table class="table" *ngIf="products">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Imagem</th>
                 <th>Link</th>
@@ -14,9 +13,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
-                <td><img src="getImageData(product.imageLink)" alt="Imagem do Produto"></td>
+                <td>{{product.imageData}}</td>
                 <td>{{product.productLink}}</td>
                 <td>{{product.reserved ? 'Sim' : 'Não'}}</td>
                 <td>{{product.whoReserved}}</td>
