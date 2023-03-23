@@ -14,8 +14,8 @@
         <tbody>
             <tr *ngFor="let product of products">
                 <td>{{product.name}}</td>
-                <td>{{product.imageData}}</td>
-                <td>{{product.productLink}}</td>
+                <td><img src="{{product.imageLink}}" width="100" height="100" alt="{{product.name}} Image"></td>
+                <td><a href="{{product.productLink}}" target="_blank" class="text-decoration-none">Pesquisar Produto</a></td>
                 <td>{{product.reserved ? 'Sim' : 'Não'}}</td>
                 <td>{{product.whoReserved}}</td>
             </tr>
