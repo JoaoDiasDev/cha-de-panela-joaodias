@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Swashbuckle.Swagger.Annotations;
 using weddingshower.API.Data;
 using weddingshower.API.Models;
 
@@ -41,13 +40,64 @@ namespace weddingshower.API.Controllers
             return Ok(productRequest);
         }
 
-        [HttpGet("{id}")]
-        [SwaggerResponse(200, "image/jpeg", typeof(byte[]))]
-        public async Task<IActionResult> GetProductImageAsync(Guid id)
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetProduct([FromRoute] Guid id)
         {
-            var product = await _weddingShowerDbContext.Products.FirstOrDefaultAsync(prod =>
-            prod.IdProduct == id);
-            return File(product.ImageData, "image/jpeg");
+            var product = await _weddingShowerDbContext.Products.FirstOrDefaultAsync(prod => prod.IdProduct == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
         }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateProduct([FromRoute] Guid id, Product updateProductRequest)
+        {
+            var product = await _weddingShowerDbContext.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            product.Name = updateProductRequest.Name;
+            product.ProductLink = updateProductRequest.ProductLink;
+            product.ImageLink = updateProductRequest.ImageLink;
+            product.Reserved = updateProductRequest.Reserved;
+            product.WhoReserved = updateProductRequest.WhoReserved;
+
+            await _weddingShowerDbContext.SaveChangesAsync();
+
+            return Ok(product);
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)
+        {
+            var product = await _weddingShowerDbContext.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _weddingShowerDbContext.Products.Remove(product);
+            await _weddingShowerDbContext.SaveChangesAsync();
+            return Ok(product);
+        }
+
+        //[HttpGet("{id}")]
+        //[SwaggerResponse(200, "image/jpeg", typeof(byte[]))]
+        //public async Task<IActionResult> GetProductImageAsync(Guid id)
+        //{
+        //    var product = await _weddingShowerDbContext.Products.FirstOrDefaultAsync(prod =>
+        //    prod.IdProduct == id);
+        //    return File(product.ImageData, "image/jpeg");
+        //}
     }
 }

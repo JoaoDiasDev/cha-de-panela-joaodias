@@ -1,23 +1,27 @@
 <div class="container my-5">
     <h1>Lista de Produtos</h1>
     <h2 class="mb-3">Amanda & João Matheus</h2>
-    <table class="table" *ngIf="products">
-        <thead>
+    <table class="table table-hover table-primary" *ngIf="products">
+        <thead class="text-dark">
             <tr>
-                <th>Name</th>
-                <th>Imagem</th>
-                <th>Link</th>
-                <th>Reservado</th>
-                <th>Quem Reservou</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Imagem</th>
+                <th class="text-center">Link</th>
+                <th class="text-center">Reservado</th>
+                <th class="text-center">Quem Reservou</th>
+                <th class="text-center">Reservar</th>
+                <th class="text-center">Editar</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <td>{{product.name}}</td>
-                <td><img src="{{product.imageLink}}" width="100" height="100" alt="{{product.name}} Image"></td>
-                <td><a href="{{product.productLink}}" target="_blank" class="text-decoration-none">Pesquisar Produto</a></td>
-                <td>{{product.reserved ? 'Sim' : 'Não'}}</td>
-                <td>{{product.whoReserved}}</td>
+                <td class="text-center">{{product.name}}</td>
+                <td class="text-center"><img src="{{product.imageLink}}" width="100" height="100" alt="{{product.name}} Image"></td>
+                <td class="text-center"><a href="{{product.imageLink}}" target="_blank" class="text-decoration-none">Ver Imagem</a></td>
+                <td class="text-center">{{product.reserved ? 'Sim' : 'Não'}}</td>
+                <td class="text-center">{{product.whoReserved}}</td>
+                <td class="text-center"><a class="btn btn-success">Reservar</a></td>
+                <td class="text-center"><a class="btn btn-info" [routerLink]="['/products', 'edit', product.idProduct]">Editar</a></td>
             </tr>
         </tbody>
     </table>

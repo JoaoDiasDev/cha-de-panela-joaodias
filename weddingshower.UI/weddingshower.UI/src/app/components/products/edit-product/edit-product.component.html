@@ -1,0 +1,41 @@
+<div class="container my-5">
+  <h1 class="mb-3"> Editar Produto</h1>
+
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm" (ngSubmit)="updateProduct()">
+        <div class="mb-3">
+          <label for="idProduct" class="form-label">Id</label>
+          <input type="text" class="form-control" id="idProduct" name="idProduct" readonly disabled
+            [(ngModel)]="productDetails.idProduct">
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="productDetails.name">
+        </div>
+        <div class="mb-3">
+          <label for="imageLink" class="form-label">Link Para a Imagem</label>
+          <input type="text" class="form-control" id="imageLink" name="imageLink"
+            [(ngModel)]="productDetails.imageLink">
+        </div>
+        <div class="mb-3">
+          <label for="productLink" class="form-label">Link Para Pesquisa</label>
+          <input type="text" class="form-control" id="productLink" name="productLink"
+            [(ngModel)]="productDetails.productLink">
+        </div>
+        <div class="mb-3">
+          <label for="reserved" class="form-label">Reservado</label>
+          <input type="bool" class="form-control" id="reserved" name="reserved" [(ngModel)]="productDetails.reserved">
+        </div>
+        <div class="mb-3">
+          <label for="whoReserved" class="form-label">Quem Reservou</label>
+          <input type="text" class="form-control" id="whoReserved" name="whoReserved"
+            [(ngModel)]="productDetails.whoReserved">
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Salvar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProduct(productDetails.idProduct)">Excluir</button>
+      </form>
+    </div>
+  </div>
+
+</div>
