@@ -1,8 +1,8 @@
-<div class="container my-5">
+<div class="container my-5 text-center">
     <h1>Lista de Produtos</h1>
     <h2 class="mb-3">Amanda & João Matheus</h2>
-    <table class="table table-hover table-primary" *ngIf="products">
-        <thead class="text-dark">
+    <table class="table table-hover" *ngIf="products">
+        <thead>
             <tr>
                 <th class="text-center">Name</th>
                 <th class="text-center">Imagem</th>
@@ -16,12 +16,18 @@
         <tbody>
             <tr *ngFor="let product of products">
                 <td class="text-center">{{product.name}}</td>
-                <td class="text-center"><img src="{{product.imageLink}}" width="100" height="100" alt="{{product.name}} Image"></td>
-                <td class="text-center"><a href="{{product.imageLink}}" target="_blank" class="text-decoration-none">Ver Imagem</a></td>
+                <td class="text-center"><img src="{{product.imageLink}}" width="100" height="100"
+                        alt="{{product.name}} Image"></td>
+                <td class="text-center"><a href="{{product.imageLink}}" target="_blank" class="text-decoration-none">Ver
+                        Imagem</a></td>
                 <td class="text-center">{{product.reserved ? 'Sim' : 'Não'}}</td>
                 <td class="text-center">{{product.whoReserved}}</td>
-                <td class="text-center"><a class="btn btn-success">Reservar</a></td>
-                <td class="text-center"><a class="btn btn-info" [routerLink]="['/products', 'edit', product.idProduct]">Editar</a></td>
+                <td class="text-center"><a [ngClass]="product.reserved ? 'disabled' : ''" class="btn btn-success"
+                        [routerLink]="['/products','reserve', product.idProduct]" id="btnReserve">Reservar</a>
+                </td>
+                <td class="text-center"><a class="btn btn-info disabled"
+                        [routerLink]="['/products', 'edit' , product.idProduct]" id="btnEditar">Editar</a>
+                </td>
             </tr>
         </tbody>
     </table>

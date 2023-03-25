@@ -76,6 +76,25 @@ namespace weddingshower.API.Controllers
             return Ok(product);
         }
 
+        [HttpPut]
+        [Route("reserve/{id:Guid}")]
+        public async Task<IActionResult> ReserveProduct([FromRoute] Guid id, Product reserveProductRequest)
+        {
+            var product = await _weddingShowerDbContext.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            product.WhoReserved = reserveProductRequest.WhoReserved;
+            product.Reserved = reserveProductRequest.Reserved;
+
+            await _weddingShowerDbContext.SaveChangesAsync();
+
+            return Ok(product);
+        }
+
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)

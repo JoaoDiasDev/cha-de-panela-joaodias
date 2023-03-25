@@ -1,0 +1,24 @@
+<div class="container my-5">
+    <h1 class="mb-3"> Reservar Produto</h1>
+
+    <div class="row">
+        <div class="col-6">
+            <form #form="ngForm" (ngSubmit)="reserveProduct()">
+                <input type="hidden" class="form-control" id="reserved" name="reserved"
+                    [(ngModel)]="productDetails.reserved">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" name="name" readonly
+                        [(ngModel)]="productDetails.name">
+                </div>
+                <div class="mb-3">
+                    <label for="whoReserved" class="form-label">Digite Seu nome aqui</label>
+                    <input type="text" class="form-control" id="whoReserved" name="whoReserved"
+                        [(ngModel)]="productDetails.whoReserved">
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+</div>

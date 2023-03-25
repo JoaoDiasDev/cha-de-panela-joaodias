@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { EditProductComponent } from './components/products/edit-product/edit-product.component';
+import { ReserveProductComponent } from './components/products/reserve-product/reserve-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsListComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    ReserveProductComponent
   ],
   imports: [
     BrowserModule,

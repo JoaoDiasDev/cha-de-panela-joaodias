@@ -45,4 +45,15 @@ export class ProductsService {
       this.baseApiUrl + '/api/Products/' + idProduct
     );
   }
+
+  reserveProduct(
+    idProduct: string,
+    reserveProductRequest: Product
+  ): Observable<Product> {
+    reserveProductRequest.reserved = true;
+    return this.http.put<Product>(
+      this.baseApiUrl + '/api/Products/reserve/' + idProduct,
+      reserveProductRequest
+    );
+  }
 }
