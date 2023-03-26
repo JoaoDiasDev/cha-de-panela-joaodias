@@ -4,6 +4,8 @@ html {
   width: 100%;
   padding: 0px;
   margin: 0px;
+  min-width: fit-content;
+  min-height: fit-content;
 }
 
 body {
