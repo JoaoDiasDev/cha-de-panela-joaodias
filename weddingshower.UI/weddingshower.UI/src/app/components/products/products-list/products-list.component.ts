@@ -8,25 +8,22 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.css']
+  styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit {
-
   products: Product[] = [];
   baseApiUrl: string = environment.baseApiUrl;
-  
+
   constructor(private productService: ProductsService) {}
 
   ngOnInit(): void {
-      this.productService.getAllProducts()
-      .subscribe({
-        next: (products) => {
-          console.log(products)
-          this.products = products
-        },
-        error: (response) => {
-          console.log(response);
-        }
-      });
+    this.productService.getAllProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+      },
+      error: (response) => {
+        console.log(response);
+      },
+    });
   }
 }

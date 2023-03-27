@@ -1,4 +1,4 @@
 export const environment = {
-    production: true,
-    baseApiUrl: 'https://localhost:7092'
+  production: true,
+  baseApiUrl: 'https://weddingshowerapi.joaodiasdev.com',
 };

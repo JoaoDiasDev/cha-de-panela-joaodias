@@ -14,6 +14,8 @@ var connectionString = builder.Configuration.GetConnectionString("WeddingShowerD
 
 builder.Services.AddDbContext<WeddingShowerDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+builder.WebHost.UseUrls("http://localhost:5295", "https://localhost:5296");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,8 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
