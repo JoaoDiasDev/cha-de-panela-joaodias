@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --main_color: #fffdf3;
+  --text_color: #726d5f;
+}
+
 html {
   height: 100%;
   width: 100%;
@@ -9,40 +14,40 @@ html {
 }
 
 body {
-  color: #fff5e4;
-  background-color: #fff5e4;
+  color: var(--main_color);
+  background-color: var(--main_color);
 }
 
 h1,
 h2 {
   font-family: "Parisienne", cursive;
-  color: #ee6983;
+  color: var(--text_color);
 }
 
 .navbar-nav .nav-link.active {
-  color: #ee6983;
+  color: var(--text_color);
 }
 
 .navbar-nav .nav-link {
-  color: #ee6983;
+  color: var(--text_color);
 }
 
 nav {
-  background-color: #fff5e4;
+  background-color: var(--main_color);
 }
 
 table {
   font-family: "Montserrat", sans-serif;
-  color: #850e35;
+  color: var(--text_color);
 }
 
 thead {
-  color: #850e35;
-  background-color: #ffc4c4;
+  color: var(--text_color);
+  background-color: var(--main_color);
 }
 
 tbody {
-  color: #850e35;
+  color: var(--text_color);
 }
 
 label {
@@ -53,7 +58,7 @@ ul,
 li,
 a,
 p {
-  color: #850e35;
+  color: var(--text_color);
 }
 
 #btnReserve,

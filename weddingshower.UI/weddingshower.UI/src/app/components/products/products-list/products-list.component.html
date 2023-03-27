@@ -25,8 +25,8 @@
                 <td class="text-center"><a [ngClass]="product.reserved ? 'disabled' : ''" class="btn btn-success"
                         [routerLink]="['/products','reserve', product.idProduct]" id="btnReserve">Reservar</a>
                 </td>
-                <td class="text-center"><a class="btn btn-info disabled"
-                        [routerLink]="['/products', 'edit' , product.idProduct]" id="btnEditar">Editar</a>
+                <td class="text-center"><a class="btn btn-info" [routerLink]="['/products', 'edit' , product.idProduct]"
+                        id="btnEditar">Editar</a>
                 </td>
             </tr>
         </tbody>

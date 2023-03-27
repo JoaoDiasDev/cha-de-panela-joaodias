@@ -19,7 +19,9 @@ export class ProductsListComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
       next: (products) => {
-        this.products = products;
+        this.products = products.sort((a: Product, b: Product) =>
+          a.name.localeCompare(b.name)
+        );
       },
       error: (response) => {
         console.log(response);
