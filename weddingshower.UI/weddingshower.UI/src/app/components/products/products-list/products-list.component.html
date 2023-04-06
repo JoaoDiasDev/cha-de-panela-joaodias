@@ -15,7 +15,7 @@
         <tbody>
             <tr *ngFor="let product of products">
                 <td class="text-center">{{product.name}}</td>
-                <td class="text-center"><img src="{{product.productLink}}" width="100" height="100"
+                <td class="text-center"><img [src]="product.productLink" width="100" height="100"
                         alt="{{product.name}} Image"></td>
                 <td class="text-center"><a href="{{product.imageLink}}" target="_blank" class="">Ver
                         Imagem</a></td>
