@@ -56,4 +56,63 @@ export class ProductsService {
       reserveProductRequest
     );
   }
+
+  // async downloadAndDisplayImage(
+  //   url: string,
+  //   productName: string
+  // ): Promise<string> {
+  //   const imageUrl = url;
+  //   const fileName = '../../assets/images/products-images/' + productName;
+  //   const result = await this.http
+  //     .get(imageUrl, { responseType: 'blob' })
+  //     .toPromise();
+  //   if (result) {
+  //     const objectUrl = URL.createObjectURL(result);
+  //     const a = document.createElement('a');
+  //     a.href = objectUrl;
+  //     a.download = fileName;
+  //     a.style.display = 'none';
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //     URL.revokeObjectURL(objectUrl);
+  //     return fileName;
+  //   } else {
+  //     throw new Error('Failed to download image');
+  //   }
+  // }
+
+  async downloadAndDisplayImage(
+    url: string,
+    productName: string
+  ): Promise<string> {
+    const imageUrl = url;
+    const fileName = `products-images/${productName}`;
+    const cacheKey = `image_${fileName}`;
+    const cachedImage = localStorage.getItem(cacheKey);
+    if (cachedImage) {
+      // Image is already in cache, use it
+      return cachedImage;
+    }
+    // Image is not in cache, download it
+    const result = await this.http
+      .get(imageUrl, { responseType: 'blob' })
+      .toPromise();
+    if (result) {
+      const objectUrl = URL.createObjectURL(result);
+      const img = new Image();
+      img.src = objectUrl;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        canvas.getContext('2d')?.drawImage(img, 0, 0);
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        localStorage.setItem(cacheKey, dataUrl);
+      };
+      return objectUrl;
+    } else {
+      throw new Error('Failed to download image');
+    }
+  }
 }

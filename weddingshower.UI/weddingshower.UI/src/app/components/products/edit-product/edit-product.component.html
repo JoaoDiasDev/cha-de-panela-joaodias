@@ -25,7 +25,8 @@
         </div>
         <div class="mb-3">
           <label for="reserved" class="form-label">Reservado</label>
-          <input type="bool" class="form-control" id="reserved" name="reserved" [(ngModel)]="productDetails.reserved">
+          <input type="checkbox" class="form-check-input mx-2" id="reserved" name="reserved"
+            [(ngModel)]="productDetails.reserved">
         </div>
         <div class="mb-3">
           <label for="whoReserved" class="form-label">Quem Reservou</label>
