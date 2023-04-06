@@ -20,9 +20,13 @@ export class ProductsListComponent implements OnInit {
   ) {}
 
   getImageUrl(product: Product): SafeValue {
-    product.productLink = this.sanitizer.bypassSecurityTrustUrl(
-      product.imageLink
-    );
+    try {
+      product.productLink = this.sanitizer.bypassSecurityTrustUrl(
+        product.imageLink
+      );
+    } catch (error) {
+      console.log(error);
+    }
     return product.productLink;
   }
 
