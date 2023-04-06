@@ -14,7 +14,12 @@ export class ProductsService {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseApiUrl + '/api/Products');
+    try {
+      return this.http.get<Product[]>(this.baseApiUrl + '/api/Products');
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      throw error;
+    }
   }
 
   addProduct(addProductRequest: Product): Observable<Product> {
@@ -26,9 +31,14 @@ export class ProductsService {
   }
 
   getProduct(idProduct: string): Observable<Product> {
-    return this.http.get<Product>(
-      this.baseApiUrl + '/api/Products/' + idProduct
-    );
+    try {
+      return this.http.get<Product>(
+        this.baseApiUrl + '/api/Products/' + idProduct
+      );
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      throw error;
+    }
   }
 
   updateProduct(
