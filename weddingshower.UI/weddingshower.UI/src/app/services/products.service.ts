@@ -1,8 +1,23 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Product } from '../models/product.model';
-import { Observable, map } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  delayWhen,
+  map,
+  mergeMap,
+  retry,
+  retryWhen,
+  throwError,
+  timeout,
+  timer,
+} from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -14,12 +29,15 @@ export class ProductsService {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   getAllProducts(): Observable<Product[]> {
-    try {
-      return this.http.get<Product[]>(this.baseApiUrl + '/api/Products');
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      throw error;
-    }
+    return this.http.get<Product[]>(this.baseApiUrl + '/api/Products').pipe(
+      retry(5), // retry up to 5 times
+      delayWhen(() => timer(500)), // delay between retries
+      timeout(3000),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching products:', error);
+        return throwError(() => new Error(error.error));
+      })
+    );
   }
 
   addProduct(addProductRequest: Product): Observable<Product> {
