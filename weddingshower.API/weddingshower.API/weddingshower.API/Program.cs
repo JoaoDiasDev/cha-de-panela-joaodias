@@ -12,7 +12,15 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("WeddingShowerDbConnection");
 
-builder.Services.AddDbContext<WeddingShowerDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<WeddingShowerDbContext>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), mysqlOptions =>
+    {
+        mysqlOptions.EnableRetryOnFailure();
+        mysqlOptions.CommandTimeout(45);
+    });
+
+});
 
 builder.WebHost.UseUrls("http://localhost:5295", "https://localhost:5296");
 
