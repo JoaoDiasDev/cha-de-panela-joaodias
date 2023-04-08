@@ -32,7 +32,7 @@ export class ProductsService {
     return this.http.get<Product[]>(this.baseApiUrl + '/api/Products').pipe(
       retry(5), // retry up to 5 times
       delayWhen(() => timer(500)), // delay between retries
-      timeout(3000),
+      timeout(10000),
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching products:', error);
         return throwError(() => new Error(error.error));
