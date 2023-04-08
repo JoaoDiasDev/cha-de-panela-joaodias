@@ -10,10 +10,8 @@ import {
   Observable,
   catchError,
   delayWhen,
-  map,
-  mergeMap,
-  retry,
   retryWhen,
+  take,
   throwError,
   timeout,
   timer,
@@ -30,9 +28,13 @@ export class ProductsService {
 
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseApiUrl + '/api/Products').pipe(
-      retry(5), // retry up to 5 times
-      delayWhen(() => timer(500)), // delay between retries
-      timeout(10000),
+      timeout(5000),
+      retryWhen((errors) =>
+        errors.pipe(
+          delayWhen(() => timer(1000)), // delay between retries
+          take(5) // retry up to 5 times
+        )
+      ),
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching products:', error);
         return throwError(() => new Error(error.error));
