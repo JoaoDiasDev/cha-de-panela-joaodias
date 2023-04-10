@@ -28,10 +28,10 @@ export class ProductsService {
 
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseApiUrl + '/api/Products').pipe(
-      timeout(5000),
+      timeout(500),
       retryWhen((errors) =>
         errors.pipe(
-          delayWhen(() => timer(1000)), // delay between retries
+          delayWhen(() => timer(500)), // delay between retries
           take(5) // retry up to 5 times
         )
       ),
