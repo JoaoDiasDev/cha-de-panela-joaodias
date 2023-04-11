@@ -27,7 +27,7 @@ export class ProductsService {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseApiUrl + '/api/Products').pipe(
+    return this.http.get<Product[]>(`${this.baseApiUrl}/api/Products`).pipe(
       timeout(500),
       retryWhen((errors) =>
         errors.pipe(
